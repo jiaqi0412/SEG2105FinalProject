@@ -3,6 +3,7 @@ package com.example.lijia.finalproject;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -38,6 +39,12 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class adminSignInActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+    public void onClick5(View view) {
+
+        Intent i = new Intent(this, welcomePage.class);
+        startActivity(i);
+
+    }
 
     /**
      * Id to identity READ_CONTACTS permission request.
