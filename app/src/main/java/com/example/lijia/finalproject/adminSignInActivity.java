@@ -39,12 +39,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class adminSignInActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
-    public void onClick5(View view) {
 
-        Intent i = new Intent(this, welcomePage.class);
-        startActivity(i);
-
-    }
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -341,6 +336,7 @@ public class adminSignInActivity extends AppCompatActivity implements LoaderCall
 
             if (success) {
                 finish();
+
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
@@ -352,6 +348,13 @@ public class adminSignInActivity extends AppCompatActivity implements LoaderCall
             mAuthTask = null;
             showProgress(false);
         }
+    }
+
+    public void onClick5(View view) {
+
+        Intent i = new Intent(this, welcomePage.class);
+        startActivity(i);
+
     }
 }
 

@@ -70,9 +70,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:onClick="onClick5"
                 android:text="sign in"
                 android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/goToWelcomePage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClick5"
+                android:text="Go To Main Page" />
 
         </LinearLayout>
     </ScrollView>
