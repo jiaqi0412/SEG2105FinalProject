@@ -30,7 +30,10 @@
         <activity
             android:name=".serviceProviderSignInActivity"
             android:label="@string/title_activity_service_provider_sign_in" />
-        <activity android:name=".welcomePage"></activity>
+        <activity android:name=".welcomePage"
+            android:parentActivityName=".signUpActivity"/>
+        <activity android:name=".signUpActivity" />
+        <activity android:name=".homeOwnerSignUpActivity"></activity>
     </application>
 
 </manifest>
