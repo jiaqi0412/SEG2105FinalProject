@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+    String type;
+    public  int isHomeOwner=0;
+    public int isServiceProvider=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,15 +17,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick1(View view) {
+        type = "admin";
 
-        Intent i = new Intent(this, adminSignInActivity.class);
+        Intent i = new Intent(this, signUpActivity.class);
         startActivity(i);
 
     }
 
     public void onClick2(View view) {
-
-        Intent i = new Intent(this, homeOwnerSignInActivity.class);
+        type = "home owner";
+        isHomeOwner = 1;
+        Intent i = new Intent(this, signUpActivity.class);
 
 
 
@@ -30,14 +35,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void onClick3(View view) {
-
-        Intent i = new Intent(this, serviceProviderSignInActivity.class);
+        type = "service provider";
+        isServiceProvider = 1;
+        Intent i = new Intent(this, signUpActivity.class);
         startActivity(i);
 
     }
     public void onClick4(View view) {
 
-        Intent i = new Intent(this, signUpActivity.class);
+        Intent i = new Intent(this, signInActivity.class);
         startActivity(i);
 
     }

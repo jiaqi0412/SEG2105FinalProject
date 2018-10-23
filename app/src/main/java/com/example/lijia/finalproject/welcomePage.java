@@ -13,10 +13,13 @@ public class welcomePage extends AppCompatActivity {
         setContentView(R.layout.activity_welcome_page);
 
         Intent intent = getIntent();
-        String name = intent.getStringExtra(signUpActivity.EXTRA_TEXT);
+        String name = intent.getStringExtra(signInActivity.EXTRA_TEXT);
+        String type = intent.getStringExtra(signInActivity.EXTRA_TEXT1);
 
-        TextView textView1 = (TextView) findViewById(R.id.signUpName);
+        TextView textView1 = (TextView) findViewById(R.id.textView1);
+        TextView textView2 = (TextView) findViewById(R.id.textView2);
 
         textView1.setText(name);
+        textView2.setText(type);
     }
 }

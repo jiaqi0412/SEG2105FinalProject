@@ -22,18 +22,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".adminSignInActivity"
+            android:name=".signUpActivity"
             android:label="@string/title_activity_admin_login" />
         <activity
-            android:name=".homeOwnerSignInActivity"
-            android:label="@string/title_activity_home_owner_sign_in" />
-        <activity
-            android:name=".serviceProviderSignInActivity"
-            android:label="@string/title_activity_service_provider_sign_in" />
-        <activity android:name=".welcomePage"
-            android:parentActivityName=".signUpActivity"/>
-        <activity android:name=".signUpActivity" />
-        <activity android:name=".homeOwnerSignUpActivity"></activity>
+            android:name=".welcomePage"
+            android:parentActivityName=".signInActivity" />
+        <activity android:name=".signInActivity" />
     </application>
 
 </manifest>
