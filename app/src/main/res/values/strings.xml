@@ -15,4 +15,5 @@
     </string>
     <string name="title_activity_home_owner_sign_in">Sign in</string>
     <string name="title_activity_service_provider_sign_in">Sign in</string>
+    <string name="title_activity_login_test">Sign in</string>
 </resources>

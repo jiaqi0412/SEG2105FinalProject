@@ -4,21 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="46dp"
-        android:layout_alignTop="@+id/signUpButton"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="134dp"
-        android:text="Already had an account? Click here to sign in :"
-        tools:layout_editor_absoluteX="11dp"
-        tools:layout_editor_absoluteY="362dp" />
+    tools:context=".Main2Activity">
 
     <TextView
         android:id="@+id/textView"
@@ -34,23 +20,10 @@
         android:layout_marginTop="66dp"
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
-        android:text="Choose one of following sign up options:"
+        android:text="Choose one of following sign in options:"
         android:textSize="20sp"
         tools:layout_editor_absoluteX="20dp"
         tools:layout_editor_absoluteY="133dp" />
-
-    <Button
-        android:id="@+id/signUpButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="135dp"
-        android:onClick="onClick4"
-        android:text="SignIn"
-        tools:layout_editor_absoluteX="290dp"
-        tools:layout_editor_absoluteY="350dp" />
 
     <Button
         android:id="@+id/serviceProviderLoginButton"
