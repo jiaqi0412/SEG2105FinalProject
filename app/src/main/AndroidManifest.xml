@@ -24,7 +24,7 @@
         <activity
             android:name=".signUpActivity"
             android:label="Sign Up"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".welcomePage"
             android:label="Welcome Page"
@@ -34,7 +34,8 @@
             android:label="Sign In"
             android:parentActivityName=".Main2Activity" />
         <activity android:name=".Main2Activity" />
-        
+        <activity android:name=".adminProfile" />
+        <activity android:name=".adminEditOrRemoveService"></activity>
     </application>
 
 </manifest>
