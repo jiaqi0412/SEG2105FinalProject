@@ -17,19 +17,19 @@
         android:layout_marginLeft="84dp"
         android:layout_marginTop="63dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Service Name" />
+        android:hint="Service Name"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/serviceHourlyRate"
-        android:layout_width="wrap_content"
+        android:layout_width="246dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="135dp"
+        android:layout_marginTop="136dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Service Hourly Rate" />
+        android:hint="Service Hourly Rate (Integer)"
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/adminAddService"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="207dp"
+        android:layout_marginTop="231dp"
         android:onClick="onClick10"
         android:text="Add Service" />
 
