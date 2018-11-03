@@ -29,7 +29,7 @@
         android:layout_marginTop="136dp"
         android:ems="10"
         android:hint="Service Hourly Rate (Integer)"
-        android:inputType="textPersonName" />
+        android:inputType="text" />
 
     <Button
         android:id="@+id/adminAddService"
