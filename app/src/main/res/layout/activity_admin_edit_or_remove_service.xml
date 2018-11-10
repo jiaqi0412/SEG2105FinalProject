@@ -8,13 +8,13 @@
 
     <TextView
         android:id="@+id/textViewServiceName"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
-        android:text="TextView" />
+        android:text="Long Click to Edit or Delete"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
     <TextView
         android:id="@+id/textViewServiceHourlyRate"
@@ -23,7 +23,6 @@
         android:layout_below="@+id/textViewServiceName"
         android:layout_alignParentStart="true"
         android:layout_marginTop="0dp"
-        android:text="TextView"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
     <ListView

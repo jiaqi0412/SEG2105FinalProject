@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:padding="@dimen/activity_horizontal_margin"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/editTextHourlyRate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView5"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="2dp"
+        android:ems="10"
+        android:hint="Enter new hourly rate"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/buttonUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextHourlyRate"
+        android:layout_alignParentStart="true"
+        android:text="Update" />
+
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="352dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonUpdate"
+        android:layout_alignStart="@+id/editTextHourlyRate"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="3dp"
+        android:text="Delete" />
+</RelativeLayout>
