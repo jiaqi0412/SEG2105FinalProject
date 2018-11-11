@@ -29,4 +29,5 @@ public class welcomePage extends AppCompatActivity {
         startActivity(i);
 
     }
+
 }
