@@ -1,4 +1,0 @@
-#Sat Nov 10 16:05:19 EST 2018
-base.0=D\:\\AndroidStudioProjectLocation\\New folder\\finalProject\\finalProject\\app\\build\\intermediates\\transforms\\dexMerger\\androidTest\\debug\\0
-path.0=classes.dex
-renamed.0=classes.dex
