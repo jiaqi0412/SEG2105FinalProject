@@ -35,7 +35,11 @@
             android:parentActivityName=".Main2Activity" />
         <activity android:name=".Main2Activity" />
         <activity android:name=".adminProfile" />
-        <activity android:name=".adminEditOrRemoveService"></activity>
+        <activity android:name=".adminEditOrRemoveService" />
+        <activity android:name=".ServiceProviderPage" />
+        <activity android:name=".HomeOwnerPage" />
+        <activity android:name=".serviceProviderProfileInforPage" />
+        <activity android:name=".serviceProviderProfileInfoPage"></activity>
     </application>
 
 </manifest>
