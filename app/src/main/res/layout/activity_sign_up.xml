@@ -12,7 +12,7 @@
         android:layout_height="54dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="89dp"
+        android:layout_marginTop="63dp"
         android:text="Sign up page"
         android:textSize="32sp" />
 
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="169dp"
+        android:layout_marginTop="133dp"
         android:hint="Name"
         android:inputType="textPersonName" />
 
@@ -38,10 +38,10 @@
         android:layout_alignParentRight="true"
         android:layout_marginStart="87dp"
         android:layout_marginLeft="87dp"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="11dp"
         android:layout_marginEnd="94dp"
         android:layout_marginRight="94dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="41dp"
         android:hint="Email"
         android:inputType="textPersonName" />
 
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="261dp"
+        android:layout_marginTop="198dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword" />
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="57dp"
+        android:layout_marginBottom="81dp"
         android:onClick="onClick5"
         android:text="sign up" />
 
@@ -72,5 +72,14 @@
         android:layout_height="57dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp" />
+        android:layout_marginTop="2dp" />
+
+    <Button
+        android:id="@+id/suAlready"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="13dp"
+        android:text="Already SignedUp? Login!" />
 </RelativeLayout>
