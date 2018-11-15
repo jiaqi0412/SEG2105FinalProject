@@ -1,12 +1,16 @@
-package com.example.lijia.finalproject
+package com.example.lijia.finalproject;
 
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
 
-class HomeOwnerPage : AppCompatActivity() {
+public class HomeOwnerPage extends AppCompatActivity {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home_owner_page)
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_admin_profile);
     }
+
+
 }
