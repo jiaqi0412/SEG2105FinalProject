@@ -1,14 +1,12 @@
 package com.example.lijia.finalproject;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,7 +23,7 @@ public class signUpActivity extends AppCompatActivity {
     public int isServiceProvider=0;
 
     private EditText Password, Name, Email;
-    private Button SignUp;
+    private Button SignUp, suAlready;
     private FirebaseAuth fbAuth;
 
     public  String type;
@@ -38,7 +36,7 @@ public class signUpActivity extends AppCompatActivity {
         Intent intent = getIntent();
         isHomeOwner = intent.getIntExtra(MainActivity.EXTRA_NUMBER1, 0);
         isServiceProvider = intent.getIntExtra(MainActivity.EXTRA_NUMBER2, 0);
-
+        Button suAlready = (Button) findViewById(R.id.suAlready);
         fbAuth = FirebaseAuth.getInstance();
 
 //        Intent intent = getIntent();
@@ -84,6 +82,14 @@ public class signUpActivity extends AppCompatActivity {
                         }
                     });
                 }
+            }
+        });
+
+        suAlready.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(signUpActivity.this, Main2Activity.class);
+                startActivity(i);
             }
         });
 

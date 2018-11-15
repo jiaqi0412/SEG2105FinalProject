@@ -22,7 +22,7 @@ public class signInActivity extends AppCompatActivity {
     private EditText Password,Name;
     private FirebaseAuth fbAuth;
 
-    private Button SignIn;
+    private Button SignIn, redirectToSignUp;
     public  String type;
     public String name;
     public  int isHomeOwner=0;
@@ -41,6 +41,7 @@ public class signInActivity extends AppCompatActivity {
         Name = (EditText)findViewById(R.id.signInName);
         Password = (EditText)findViewById(R.id.signInPassword);
         Button SignIn = (Button)findViewById(R.id.signInButton);
+        Button redirectToSignUp = (Button) findViewById(R.id.redirectToSignUp);
 
         fbAuth = FirebaseAuth.getInstance();
 
@@ -57,6 +58,16 @@ public class signInActivity extends AppCompatActivity {
                 validate(Name.getText().toString(), Password.getText().toString());
             }
         });
+
+
+        redirectToSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(signInActivity.this, MainActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     public void validate(String Name, String Password){
