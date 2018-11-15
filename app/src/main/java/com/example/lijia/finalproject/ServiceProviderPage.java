@@ -9,7 +9,7 @@ public class ServiceProviderPage extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_profile);
+        setContentView(R.layout.activity_service_prodiver_page);
     }
 
     public void onClick100(View view) {
