@@ -16,48 +16,6 @@
         android:layout_marginBottom="0dp"
         android:text="Update" />
 
-    <EditText
-        android:id="@+id/address"
-        android:layout_width="380dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:hint="Enter address"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/address"
-        android:layout_alignParentStart="true"
-        android:ems="10"
-        android:hint="Enter phone number"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/nameOfCompany"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/phone"
-        android:layout_alignParentStart="true"
-        android:ems="10"
-        android:hint="Enter name of company"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/GeneralDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/nameOfCompany"
-        android:layout_alignParentStart="true"
-        android:ems="10"
-        android:hint="Enter general description"
-        android:inputType="textPersonName" />
-
     <Button
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
@@ -67,5 +25,14 @@
         android:layout_marginBottom="47dp"
         android:onClick="onClick101"
         android:text="Don't want to update? Back to profile page" />
+
+    <ListView
+        android:id="@+id/ServiceProviderInfoList"
+        android:layout_width="match_parent"
+        android:layout_height="415dp"
+        android:layout_below="@+id/GeneralDescription"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-2dp" />
 
 </RelativeLayout>
