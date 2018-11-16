@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -31,10 +29,10 @@ public class ServiceProviderInfoList extends ArrayAdapter<ServiceProviderProfile
         View listViewItem = inflater.inflate(R.layout.activity_service_provider_profile_info_page, null, true);
 
 
-        TextView textViewServiceProviderAddress = (TextView) listViewItem.findViewById(R.id.address);
-        TextView textViewServiceProviderPhone = (TextView) listViewItem.findViewById(R.id.phone);
-        TextView textViewServiceProviderGeneralDescription = (TextView) listViewItem.findViewById(R.id.GeneralDescription);
-        TextView textViewServiceProviderCompanyName = (TextView) listViewItem.findViewById(R.id.nameOfCompany);
+        TextView textViewServiceProviderAddress = (TextView) listViewItem.findViewById(R.id.address2);
+        TextView textViewServiceProviderPhone = (TextView) listViewItem.findViewById(R.id.phone2);
+        TextView textViewServiceProviderGeneralDescription = (TextView) listViewItem.findViewById(R.id.generalDescription2);
+        TextView textViewServiceProviderCompanyName = (TextView) listViewItem.findViewById(R.id.companyName2);
 
         ServiceProviderProfile serviceProviderProfileList = serviceProviderInfoList.get(position);
 

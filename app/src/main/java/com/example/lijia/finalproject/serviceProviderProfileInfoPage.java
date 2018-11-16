@@ -74,59 +74,63 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
 
         dialogBuilder.setView(dialogView);
 
-        final EditText textViewServiceHourlyRate = (EditText) dialogView.findViewById(R.id.editTextHourlyRate);
-        final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdate);
-        final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDelete);
+        final EditText textViewServiceProviderAddress = (EditText) dialogView.findViewById(R.id.address2);
+        final EditText textViewServiceProviderPhone = (EditText) dialogView.findViewById(R.id.phone2);
+        final EditText textViewServiceProviderGeneralDescription = (EditText) dialogView.findViewById(R.id.generalDescription2);
+        final EditText textViewServiceProviderCompanyName = (EditText) dialogView.findViewById(R.id.companyName2);
+        final Button update = (Button) dialogView.findViewById(R.id.update);
 
-        dialogBuilder.setTitle("Updating Service " + serviceId);
+
+        dialogBuilder.setTitle("Updating service Provider Company Name " + serviceProviderCompanyName);
 
         final AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
 
-        buttonUpdate.setOnClickListener(new View.OnClickListener(){
+        update.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
 
 
-                String HourlyRate = textViewServiceHourlyRate.getText().toString().trim();
-                if(TextUtils.isEmpty(HourlyRate)){
-                    textViewServiceHourlyRate.setError("Service Hourly Rate required");
+                String ServiceProviderAddress = textViewServiceProviderAddress.getText().toString().trim();
+                String ServiceProviderPhone = textViewServiceProviderPhone.getText().toString().trim();
+                String ServiceProviderGeneralDescription = textViewServiceProviderGeneralDescription.getText().toString().trim();
+                String ServiceProviderCompanyName = textViewServiceProviderCompanyName.getText().toString().trim();
+                if(TextUtils.isEmpty(ServiceProviderAddress)){
+                    textViewServiceProviderAddress.setError("Service Provider Address required");
                     return;
                 }
-                updateService(serviceId,serviceName, HourlyRate);
+                else if(TextUtils.isEmpty(ServiceProviderPhone)){
+                    textViewServiceProviderPhone.setError("Service Provider Phone required");
+                    return;
+                }
+
+                else if(TextUtils.isEmpty(ServiceProviderCompanyName)){
+                    textViewServiceProviderCompanyName.setError("Service Provider CompanyName required");
+                    return;
+                }
+                updateService(ServiceProviderAddress,ServiceProviderPhone, ServiceProviderGeneralDescription, ServiceProviderCompanyName);
 
                 alertDialog.dismiss();
             }
         });
 
-        buttonDelete.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                deleteService(serviceId);
-            }
-        });
+
 
 
     }
 
-    private void deleteService(String serviceId){
 
-        DatabaseReference Service = FirebaseDatabase.getInstance().getReference("service").child(serviceId);
+    private boolean updateService(String ServiceProviderAddress, String ServiceProviderPhone,
+                                  String ServiceProviderCompanyName, String ServiceProviderGeneralDescription){
 
-        Service.removeValue();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("serviceProviderInfo").child(ServiceProviderCompanyName);
 
-        Toast.makeText(this, "Service is deleted", Toast.LENGTH_LONG).show();
-    }
+        ServiceProviderProfile serviceProviderProfile = new ServiceProviderProfile(ServiceProviderAddress,
+                ServiceProviderPhone, ServiceProviderCompanyName, ServiceProviderGeneralDescription);
 
-    private boolean updateService(String id, String name, String serviceHourlyRate){
+        databaseReference.setValue(serviceProviderProfile);
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("service").child(id);
-
-        Service service = new Service(id, name, serviceHourlyRate);
-
-        databaseReference.setValue(service);
-
-        Toast.makeText(this, "Service Updated Successfully", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Service Provider ProfileUpdated Successfully", Toast.LENGTH_LONG).show();
 
         return true;
     }
@@ -139,15 +143,15 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot){
 
-                serviceList.clear();
+                serviceProviderInfoList.clear();
                 for(DataSnapshot serviceSnapshot : dataSnapshot.getChildren()){
-                    Service service = serviceSnapshot.getValue(Service.class);
+                    ServiceProviderProfile serviceProviderProfile = serviceSnapshot.getValue(ServiceProviderProfile.class);
 
-                    serviceList.add(service);
+                    serviceProviderInfoList.add(serviceProviderProfile);
                 }
 
-                ServiceList adapter = new ServiceList(adminEditOrRemoveService.this, serviceList);
-                listViewService.setAdapter(adapter);
+                ServiceProviderInfoList adapter = new ServiceProviderInfoList(serviceProviderProfileInfoPage.this, serviceProviderInfoList);
+                ServiceProviderInfoList.setAdapter(adapter);
             }
 
             @Override

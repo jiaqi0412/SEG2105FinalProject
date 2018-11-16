@@ -16,7 +16,7 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/phone"
+        android:id="@+id/phone2"
         android:layout_width="368dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/address2"
@@ -26,20 +26,20 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/companyName"
+        android:id="@+id/companyName2"
         android:layout_width="359dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/phone"
+        android:layout_below="@+id/phone2"
         android:layout_alignStart="@+id/address2"
         android:ems="10"
         android:hint="Enter a new comapny name "
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/generalDescription"
+        android:id="@+id/generalDescription2"
         android:layout_width="363dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/companyName"
+        android:layout_below="@+id/companyName2"
         android:layout_alignStart="@+id/address2"
         android:ems="10"
         android:hint="Enter a new General Description"
