@@ -19,6 +19,7 @@ public class ServiceProviderPage extends AppCompatActivity {
     EditText serviceProviderCompanyName;
     EditText serviceProviderGeneralDescription;
     Button addButton;
+    Button profileInfoButton;
     DatabaseReference databaseService;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,14 @@ public class ServiceProviderPage extends AppCompatActivity {
         serviceProviderCompanyName = (EditText) findViewById(R.id.editText3);
         serviceProviderGeneralDescription = (EditText) findViewById(R.id.editText4);
         addButton = (Button) findViewById(R.id.addButton);
+        profileInfoButton= (Button) findViewById(R.id.profileInfoButton);
+
+        profileInfoButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+
+            }
+        });
 
         addButton.setOnClickListener(new View.OnClickListener(){
             @Override
