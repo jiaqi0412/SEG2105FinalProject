@@ -1,5 +1,6 @@
 package com.example.lijia.finalproject;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -27,32 +28,36 @@ import javax.xml.validation.Validator;
 
 public class serviceProviderProfileInfoPage extends AppCompatActivity {
 
-    EditText address;
-    EditText phone;
-    EditText companyName;
-    EditText generalDescription;
-    ListView ServiceProviderInfoList;
+    EditText address2;
+    EditText phone2;
+    EditText companyName2;
+    EditText generalDescription2;
+    ListView listViewServiceProviderInfoList;
     List<ServiceProviderProfile> serviceProviderInfoList;
     DatabaseReference databaseService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_provider_profile_info_page);
         databaseService = FirebaseDatabase.getInstance().getReference("serviceProviderInfo");
-        ServiceProviderInfoList = (ListView) findViewById(R.id.ServiceProviderInfoList);
+        listViewServiceProviderInfoList = (ListView) findViewById(R.id.listViewServiceProviderInfoList);
         serviceProviderInfoList = new ArrayList<>();
 
-        ServiceProviderInfoList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+        listViewServiceProviderInfoList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l){
                 ServiceProviderProfile serviceProfile = serviceProviderInfoList.get(i);
 
-                showUpdateDialog(serviceProfile.getServiceProviderAddress(),serviceProfile.getServiceProviderPhone(),
+                showUpdateDialog(serviceProfile.getServiceProviderId(),serviceProfile.getServiceProviderAddress(),serviceProfile.getServiceProviderPhone(),
                         serviceProfile.getServiceProviderGeneralDescription(), serviceProfile.getServiceProviderCompanyName());
                 return false;
             }
 
         });
+
+
+
     }
 
     public void onClick101(View view) {
@@ -63,8 +68,10 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
 
     }
 
-    private void showUpdateDialog(final String serviceProviderAddress, final String serviceProviderPhone,
-                                  final String serviceProviderGeneralDescription, final String serviceProviderCompanyName){
+    private void showUpdateDialog(final String serviceProviderId, final String serviceProviderAddress,
+                                  final String serviceProviderPhone,
+                                  final String serviceProviderCompanyName,
+                                  final String serviceProviderGeneralDescription ){
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
 
@@ -76,12 +83,13 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
 
         final EditText textViewServiceProviderAddress = (EditText) dialogView.findViewById(R.id.address2);
         final EditText textViewServiceProviderPhone = (EditText) dialogView.findViewById(R.id.phone2);
-        final EditText textViewServiceProviderGeneralDescription = (EditText) dialogView.findViewById(R.id.generalDescription2);
         final EditText textViewServiceProviderCompanyName = (EditText) dialogView.findViewById(R.id.companyName2);
+        final EditText textViewServiceProviderGeneralDescription = (EditText) dialogView.findViewById(R.id.generalDescription2);
+
         final Button update = (Button) dialogView.findViewById(R.id.update);
 
 
-        dialogBuilder.setTitle("Updating service Provider Company Name " + serviceProviderCompanyName);
+        dialogBuilder.setTitle("Updating service Provider id " + serviceProviderId);
 
         final AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
@@ -93,8 +101,9 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
 
                 String ServiceProviderAddress = textViewServiceProviderAddress.getText().toString().trim();
                 String ServiceProviderPhone = textViewServiceProviderPhone.getText().toString().trim();
-                String ServiceProviderGeneralDescription = textViewServiceProviderGeneralDescription.getText().toString().trim();
                 String ServiceProviderCompanyName = textViewServiceProviderCompanyName.getText().toString().trim();
+                String ServiceProviderGeneralDescription = textViewServiceProviderGeneralDescription.getText().toString().trim();
+
                 if(TextUtils.isEmpty(ServiceProviderAddress)){
                     textViewServiceProviderAddress.setError("Service Provider Address required");
                     return;
@@ -108,7 +117,8 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
                     textViewServiceProviderCompanyName.setError("Service Provider CompanyName required");
                     return;
                 }
-                updateService(ServiceProviderAddress,ServiceProviderPhone, ServiceProviderGeneralDescription, ServiceProviderCompanyName);
+                updateServiceProvider(serviceProviderId, ServiceProviderAddress,ServiceProviderPhone,
+                         ServiceProviderCompanyName, ServiceProviderGeneralDescription);
 
                 alertDialog.dismiss();
             }
@@ -120,17 +130,17 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
     }
 
 
-    private boolean updateService(String ServiceProviderAddress, String ServiceProviderPhone,
+    private boolean updateServiceProvider(String ServiceProviderId,String ServiceProviderAddress, String ServiceProviderPhone,
                                   String ServiceProviderCompanyName, String ServiceProviderGeneralDescription){
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("serviceProviderInfo").child(ServiceProviderCompanyName);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("serviceProviderInfo").child(ServiceProviderId);
 
-        ServiceProviderProfile serviceProviderProfile = new ServiceProviderProfile(ServiceProviderAddress,
+        ServiceProviderProfile serviceProviderProfile = new ServiceProviderProfile(ServiceProviderId, ServiceProviderAddress,
                 ServiceProviderPhone, ServiceProviderCompanyName, ServiceProviderGeneralDescription);
 
         databaseReference.setValue(serviceProviderProfile);
 
-        Toast.makeText(this, "Service Provider ProfileUpdated Successfully", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Service Provider Profile Updated Successfully", Toast.LENGTH_LONG).show();
 
         return true;
     }
@@ -139,19 +149,20 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
 
         super.onStart();
 
+
         databaseService.addValueEventListener(new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot){
 
                 serviceProviderInfoList.clear();
-                for(DataSnapshot serviceSnapshot : dataSnapshot.getChildren()){
-                    ServiceProviderProfile serviceProviderProfile = serviceSnapshot.getValue(ServiceProviderProfile.class);
+                for(DataSnapshot serviceProviderInfoSnapshot : dataSnapshot.getChildren()){
+                    ServiceProviderProfile serviceProviderProfile = serviceProviderInfoSnapshot.getValue(ServiceProviderProfile.class);
 
                     serviceProviderInfoList.add(serviceProviderProfile);
                 }
 
                 ServiceProviderInfoList adapter = new ServiceProviderInfoList(serviceProviderProfileInfoPage.this, serviceProviderInfoList);
-                ServiceProviderInfoList.setAdapter(adapter);
+                listViewServiceProviderInfoList.setAdapter(adapter);
             }
 
             @Override
