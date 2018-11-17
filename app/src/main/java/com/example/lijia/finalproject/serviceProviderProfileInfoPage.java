@@ -155,8 +155,8 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot){
 
                 serviceProviderInfoList.clear();
-                for(DataSnapshot serviceProviderInfoSnapshot : dataSnapshot.getChildren()){
-                    ServiceProviderProfile serviceProviderProfile = serviceProviderInfoSnapshot.getValue(ServiceProviderProfile.class);
+                for(DataSnapshot serviceSnapshot : dataSnapshot.getChildren()){
+                    ServiceProviderProfile serviceProviderProfile = serviceSnapshot.getValue(ServiceProviderProfile.class);
 
                     serviceProviderInfoList.add(serviceProviderProfile);
                 }
