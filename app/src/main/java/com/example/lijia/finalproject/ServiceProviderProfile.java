@@ -10,6 +10,7 @@ public class ServiceProviderProfile {
     String serviceProviderPhone;
     String serviceProviderGeneralDescription;
     String serviceProviderCompanyName;
+    String strYesOrNo;
     //String serviceProviderId;
 
     public ServiceProviderProfile(){
@@ -18,12 +19,13 @@ public class ServiceProviderProfile {
 
     public ServiceProviderProfile(String serviceProviderAddress,
     String serviceProviderPhone, String serviceProviderGeneralDescription,
-                                  String serviceProviderCompanyName){
+                                  String serviceProviderCompanyName,String strYesOrNo ){
         
         this.serviceProviderAddress = serviceProviderAddress;
         this.serviceProviderPhone = serviceProviderPhone;
         this.serviceProviderGeneralDescription = serviceProviderGeneralDescription;
         this.serviceProviderCompanyName = serviceProviderCompanyName;
+        this.strYesOrNo = strYesOrNo;
         //this.serviceProviderId = serviceProviderId;
     }
 
@@ -42,6 +44,9 @@ public class ServiceProviderProfile {
     }
     public String getServiceProviderCompanyName(){
         return serviceProviderCompanyName;
+    }
+    public String getStrYesOrNo(){
+        return strYesOrNo;
     }
 
 
