@@ -101,7 +101,7 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
                     //firebaseAuth.signOut();
                     Toast.makeText(serviceProviderProfileInfoPage.this, "Successfully Registered, Upload complete!", Toast.LENGTH_SHORT).show();
                     //finish();
-                    startActivity(new Intent(serviceProviderProfileInfoPage.this, ServiceProviderProfile.class));
+                    startActivity(new Intent(serviceProviderProfileInfoPage.this, serviceProviderProfileInfoPage.class));
 
                 }
             }
