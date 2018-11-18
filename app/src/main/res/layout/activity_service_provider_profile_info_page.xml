@@ -6,6 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".serviceProviderProfileInfoPage">
 
+    <EditText
+        android:id="@+id/editTextAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profileInfoButton"
+        android:layout_alignParentStart="true"
+        android:ems="10"
+        android:hint="Enter a new address"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/tvPhone"
+        android:layout_width="201dp"
+        android:layout_height="37dp"
+        android:layout_below="@+id/tvAddress"
+        android:layout_alignStart="@+id/backButton"
+        android:text="Phone: " />
+
+    <EditText
+        android:id="@+id/editTextPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextAddress"
+        android:layout_alignParentStart="true"
+        android:ems="10"
+        android:hint="Enter a phone number"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editTextCompanyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextPhone"
+        android:layout_alignParentStart="true"
+        android:ems="10"
+        android:hint="Enter company name"
+        android:inputType="textPersonName" />
+
     <Button
         android:id="@+id/updateButton"
         android:layout_width="match_parent"
@@ -13,7 +51,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginBottom="53dp"
         android:text="Update" />
 
     <Button
@@ -22,20 +60,36 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="47dp"
+        android:layout_marginBottom="109dp"
         android:onClick="onClick101"
         android:text="Don't want to update? Back to profile page" />
 
-    <ListView
-        android:id="@+id/listViewServiceProviderInfoList"
-        android:layout_width="match_parent"
-        android:layout_height="376dp"
-        android:layout_below="@+id/GeneralDescription"
+    <EditText
+        android:id="@+id/editTextGeneralDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextCompanyName"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="-2dp"
-        android:background="@android:color/holo_green_light">
+        android:ems="10"
+        android:hint="Enter a new General Description"
+        android:inputType="textPersonName" />
 
-    </ListView>
+    <Button
+        android:id="@+id/loadButton"
+        android:layout_width="349dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/backButton"
+        android:layout_alignStart="@+id/backButton"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="-157dp"
+        android:text="load" />
+
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="200dp"
+        android:layout_height="33dp"
+        android:layout_below="@+id/editTextGeneralDescription"
+        android:layout_alignStart="@+id/backButton"
+        android:text="Address:" />
 
 </RelativeLayout>

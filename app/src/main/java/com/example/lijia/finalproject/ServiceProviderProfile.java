@@ -1,5 +1,8 @@
 package com.example.lijia.finalproject;
 
+import android.content.Intent;
+import android.view.View;
+
 public class ServiceProviderProfile {
 
     
@@ -7,13 +10,13 @@ public class ServiceProviderProfile {
     String serviceProviderPhone;
     String serviceProviderGeneralDescription;
     String serviceProviderCompanyName;
-    String serviceProviderId;
+    //String serviceProviderId;
 
     public ServiceProviderProfile(){
 
     }
 
-    public ServiceProviderProfile(String serviceProviderId,String serviceProviderAddress,
+    public ServiceProviderProfile(String serviceProviderAddress,
     String serviceProviderPhone, String serviceProviderGeneralDescription,
                                   String serviceProviderCompanyName){
         
@@ -21,16 +24,16 @@ public class ServiceProviderProfile {
         this.serviceProviderPhone = serviceProviderPhone;
         this.serviceProviderGeneralDescription = serviceProviderGeneralDescription;
         this.serviceProviderCompanyName = serviceProviderCompanyName;
-        this.serviceProviderId = serviceProviderId;
+        //this.serviceProviderId = serviceProviderId;
     }
 
 
     public String getServiceProviderAddress(){
         return serviceProviderAddress;
     }
-    public String getServiceProviderId(){
+    /*public String getServiceProviderId(){
         return serviceProviderId;
-    }
+    }*/
     public String getServiceProviderPhone(){
         return serviceProviderPhone;
     }
@@ -40,5 +43,7 @@ public class ServiceProviderProfile {
     public String getServiceProviderCompanyName(){
         return serviceProviderCompanyName;
     }
+
+
 
 }

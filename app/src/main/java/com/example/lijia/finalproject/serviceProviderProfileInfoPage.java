@@ -1,63 +1,188 @@
 package com.example.lijia.finalproject;
 
-import android.content.DialogInterface;
+import android.app.Application;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.validation.Validator;
 
 public class serviceProviderProfileInfoPage extends AppCompatActivity {
+    private TextView tvAddress, tvPhone;
 
-    EditText address2;
-    EditText phone2;
-    EditText companyName2;
-    EditText generalDescription2;
-    ListView listViewServiceProviderInfoList;
-    List<ServiceProviderProfile> serviceProviderInfoList;
-    DatabaseReference databaseService;
+    EditText editTextAddress, editTextPhone,editTextCompanyName, editTextGeneralDescription;
+
+    String address, phone, companyName, generalDescription;
+
+    private FirebaseAuth firebaseAuth;
+
+    private Button updateButton;
+    private Button loadButton;
+    private FirebaseDatabase firebaseDatabase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_provider_profile_info_page);
-        databaseService = FirebaseDatabase.getInstance().getReference("serviceProviderInfo");
-        listViewServiceProviderInfoList = (ListView) findViewById(R.id.listViewServiceProviderInfoList);
-        serviceProviderInfoList = new ArrayList<>();
 
-        listViewServiceProviderInfoList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+        tvAddress = findViewById(R.id.tvAddress);
+        tvPhone = findViewById(R.id.tvPhone);
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        setupUIViews();
+
+        loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l){
-                ServiceProviderProfile serviceProfile = serviceProviderInfoList.get(i);
+            public void onClick(View v) {
+                loadData();
 
-                showUpdateDialog(serviceProfile.getServiceProviderId(),serviceProfile.getServiceProviderAddress(),serviceProfile.getServiceProviderPhone(),
-                        serviceProfile.getServiceProviderGeneralDescription(), serviceProfile.getServiceProviderCompanyName());
-                return false;
+                firebaseAuth.signOut();
+                Toast.makeText(serviceProviderProfileInfoPage.this,
+                        "Successfully Registered, Upload complete!", Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(new Intent(serviceProviderProfileInfoPage.this, serviceProviderProfileInfoPage.class));
             }
-
         });
 
 
 
+
+
+
+        //textViewServiceProviderInfo = findViewById(R.id.textViewServiceProviderInfo);
+
+//        firebaseAuth = FirebaseAuth.getInstance();
+
+
+
+
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(validate()){
+
+                    //sendEmailVerification();
+                                sendUserData();
+                                firebaseAuth.signOut();
+                                Toast.makeText(serviceProviderProfileInfoPage.this,
+                                        "Successfully Registered, Upload complete!", Toast.LENGTH_SHORT).show();
+                                finish();
+                                startActivity(new Intent(serviceProviderProfileInfoPage.this, serviceProviderProfileInfoPage.class));
+
+
+
+
+                }
+            }
+        });
+
+
+
+    }
+
+    private void setupUIViews(){
+        editTextAddress = (EditText)findViewById(R.id.editTextAddress);
+        editTextPhone = (EditText)findViewById(R.id.editTextPhone);
+        editTextCompanyName = (EditText)findViewById(R.id.editTextCompanyName);
+        editTextGeneralDescription = (EditText)findViewById(R.id.editTextGeneralDescription);
+        updateButton = (Button)findViewById(R.id.updateButton);
+        //userLogin = (TextView)findViewById(R.id.tvUserLogin);
+
+
+
+    }
+
+
+
+    public void loadData(){
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ServiceProviderProfile serviceProviderProfile = dataSnapshot.getValue(ServiceProviderProfile.class);
+                tvAddress.setText("Address: "+serviceProviderProfile.getServiceProviderAddress());
+                tvPhone.setText("Phone: "+serviceProviderProfile.getServiceProviderPhone());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(serviceProviderProfileInfoPage.this,
+                        databaseError.getCode(), Toast.LENGTH_LONG).show();
+            }
+        });
+        ServiceProviderProfile userProfile = new ServiceProviderProfile(address,
+                phone, companyName, generalDescription);
+        databaseReference.setValue(userProfile);
+
+    }
+    private Boolean validate(){
+        Boolean result = false;
+
+        address = editTextAddress.getText().toString();
+        phone = editTextPhone.getText().toString();
+        companyName = editTextCompanyName.getText().toString();
+        generalDescription = editTextGeneralDescription.getText().toString();
+
+
+        if(address.isEmpty() || phone.isEmpty() || companyName.isEmpty() ){
+            Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT).show();
+        }else{
+            result = true;
+        }
+
+        return result;
+    }
+
+    private void sendUserData(){
+
+        DatabaseReference myRef = firebaseDatabase.getReference(firebaseAuth.getUid());
+        ServiceProviderProfile userProfile = new ServiceProviderProfile(address,
+                phone, companyName, generalDescription);
+        myRef.setValue(userProfile);
     }
 
     public void onClick101(View view) {
@@ -68,108 +193,6 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
 
     }
 
-    private void showUpdateDialog(final String serviceProviderId, final String serviceProviderAddress,
-                                  final String serviceProviderPhone,
-                                  final String serviceProviderCompanyName,
-                                  final String serviceProviderGeneralDescription ){
-
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-
-        LayoutInflater inflater = getLayoutInflater();
-
-        final View dialogView = inflater.inflate(R.layout.update_dialog_service_provider, null);
-
-        dialogBuilder.setView(dialogView);
-
-        final EditText textViewServiceProviderAddress = (EditText) dialogView.findViewById(R.id.address2);
-        final EditText textViewServiceProviderPhone = (EditText) dialogView.findViewById(R.id.phone2);
-        final EditText textViewServiceProviderCompanyName = (EditText) dialogView.findViewById(R.id.companyName2);
-        final EditText textViewServiceProviderGeneralDescription = (EditText) dialogView.findViewById(R.id.generalDescription2);
-
-        final Button update = (Button) dialogView.findViewById(R.id.update);
 
 
-        dialogBuilder.setTitle("Updating service Provider id " + serviceProviderId);
-
-        final AlertDialog alertDialog = dialogBuilder.create();
-        alertDialog.show();
-
-        update.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-
-
-                String ServiceProviderAddress = textViewServiceProviderAddress.getText().toString().trim();
-                String ServiceProviderPhone = textViewServiceProviderPhone.getText().toString().trim();
-                String ServiceProviderCompanyName = textViewServiceProviderCompanyName.getText().toString().trim();
-                String ServiceProviderGeneralDescription = textViewServiceProviderGeneralDescription.getText().toString().trim();
-
-                if(TextUtils.isEmpty(ServiceProviderAddress)){
-                    textViewServiceProviderAddress.setError("Service Provider Address required");
-                    return;
-                }
-                else if(TextUtils.isEmpty(ServiceProviderPhone)){
-                    textViewServiceProviderPhone.setError("Service Provider Phone required");
-                    return;
-                }
-
-                else if(TextUtils.isEmpty(ServiceProviderCompanyName)){
-                    textViewServiceProviderCompanyName.setError("Service Provider CompanyName required");
-                    return;
-                }
-                updateServiceProvider(serviceProviderId, ServiceProviderAddress,ServiceProviderPhone,
-                         ServiceProviderCompanyName, ServiceProviderGeneralDescription);
-
-                alertDialog.dismiss();
-            }
-        });
-
-
-
-
-    }
-
-
-    private boolean updateServiceProvider(String ServiceProviderId,String ServiceProviderAddress, String ServiceProviderPhone,
-                                  String ServiceProviderCompanyName, String ServiceProviderGeneralDescription){
-
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("serviceProviderInfo").child(ServiceProviderId);
-
-        ServiceProviderProfile serviceProviderProfile = new ServiceProviderProfile(ServiceProviderId, ServiceProviderAddress,
-                ServiceProviderPhone, ServiceProviderCompanyName, ServiceProviderGeneralDescription);
-
-        databaseReference.setValue(serviceProviderProfile);
-
-        Toast.makeText(this, "Service Provider Profile Updated Successfully", Toast.LENGTH_LONG).show();
-
-        return true;
-    }
-    @Override
-    protected void onStart(){
-
-        super.onStart();
-
-
-        databaseService.addValueEventListener(new ValueEventListener(){
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot){
-
-                serviceProviderInfoList.clear();
-                for(DataSnapshot serviceSnapshot : dataSnapshot.getChildren()){
-                    ServiceProviderProfile serviceProviderProfile = serviceSnapshot.getValue(ServiceProviderProfile.class);
-
-                    serviceProviderInfoList.add(serviceProviderProfile);
-                }
-
-                ServiceProviderInfoList adapter = new ServiceProviderInfoList(serviceProviderProfileInfoPage.this, serviceProviderInfoList);
-                listViewServiceProviderInfoList.setAdapter(adapter);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError){
-
-            }
-
-        });
-    }
 }

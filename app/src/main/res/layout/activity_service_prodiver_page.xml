@@ -25,54 +25,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:onClick="onClick100"
+        android:onClick="onClick1000"
         android:text="Want update profile information? Click here" />
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/profileInfoButton"
-        android:layout_alignParentStart="true"
-        android:ems="10"
-        android:hint="Enter a new address"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText"
-        android:layout_alignParentStart="true"
-        android:ems="10"
-        android:hint="Enter a phone number"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText2"
-        android:layout_alignParentStart="true"
-        android:ems="10"
-        android:hint="Enter a company name"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText3"
-        android:layout_alignParentStart="true"
-        android:ems="10"
-        android:hint="Enter a new General Description"
-        android:inputType="textPersonName" />
-
-    <Button
-        android:id="@+id/addButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText4"
-        android:layout_centerHorizontal="true"
-        android:text="Add" />
 </RelativeLayout>
