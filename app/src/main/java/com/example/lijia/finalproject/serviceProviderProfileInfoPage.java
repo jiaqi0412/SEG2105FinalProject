@@ -95,14 +95,12 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(validate()){
-
                     //sendEmailVerification();
                     sendUserData();
                     //firebaseAuth.signOut();
                     Toast.makeText(serviceProviderProfileInfoPage.this, "Successfully Registered, Upload complete!", Toast.LENGTH_SHORT).show();
                     //finish();
-                    startActivity(new Intent(serviceProviderProfileInfoPage.this, ServiceProviderProfile.class));
-
+                   // startActivity(new Intent(serviceProviderProfileInfoPage.this, ServiceProviderProfile.class));
                 }
             }
         });
