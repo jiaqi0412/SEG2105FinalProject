@@ -26,6 +26,6 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:onClick="onClick1000"
-        android:text="Want update profile information? Click here" />
+        android:text="update profile info/check Date (Click here)" />
 
 </RelativeLayout>

@@ -20,11 +20,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class serviceProviderProfileInfoPage extends AppCompatActivity {
-    private TextView tvAddress, tvPhone, tvCompanyName, tvGeneralDescription, tvLicensed;
+    private TextView tvAddress, tvPhone, tvCompanyName, tvGeneralDescription, tvLicensed
+            ,tvAvailability1,tvAvailability2, tvAvailability3
+            ,tvAvailability4;
 
-    EditText editTextAddress, editTextPhone,editTextCompanyName, editTextGeneralDescription;
+    EditText editTextAddress, editTextPhone,editTextCompanyName, editTextGeneralDescription
+            ,editText1, editText2, editText3, editText4;
 
-    String address, phone, companyName, generalDescription, strYesOrNo;
+    String address, phone, companyName, generalDescription, strYesOrNo
+            ,A1,  A2, A3
+            , A4;
 
     private FirebaseAuth firebaseAuth;
 
@@ -46,6 +51,17 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
         tvLicensed = findViewById(R.id.tvLicensed);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
+
+        tvAvailability1 = findViewById(R.id.tvAvailability1);
+        tvAvailability2 = findViewById(R.id.tvAvailability2);
+        tvAvailability3 = findViewById(R.id.tvAvailability3);
+        tvAvailability4 = findViewById(R.id.tvAvailability4);
+
+        editText1 = (EditText)findViewById(R.id.editText1);
+        editText2 = (EditText)findViewById(R.id.editText2);
+        editText3 = (EditText)findViewById(R.id.editText3);
+        editText4 = (EditText)findViewById(R.id.editText4);
+
         setupUIViews();
         licensedRadioGroup = findViewById(R.id.radioGroup);
 
@@ -74,12 +90,16 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ServiceProviderProfile serviceProviderProfile = dataSnapshot.getValue(ServiceProviderProfile.class);
-                tvAddress.setText("Address: "+serviceProviderProfile.getServiceProviderAddress());
-                tvPhone.setText("Phone: "+serviceProviderProfile.getServiceProviderPhone());
-                tvCompanyName.setText("Company Name: "+serviceProviderProfile.getServiceProviderCompanyName());
-                tvGeneralDescription.setText("General Description: "+serviceProviderProfile.getServiceProviderGeneralDescription());
-                tvLicensed.setText("Licensed: "+serviceProviderProfile.getStrYesOrNo());
+                ServiceProviderProfile spp = dataSnapshot.getValue(ServiceProviderProfile.class);
+                tvAddress.setText("Address: "+spp.getServiceProviderAddress());
+                tvPhone.setText("Phone: "+spp.getServiceProviderPhone());
+                tvCompanyName.setText("Company Name: "+spp.getServiceProviderCompanyName());
+                tvGeneralDescription.setText("General Description: "+spp.getServiceProviderGeneralDescription());
+                tvLicensed.setText("Licensed: "+spp.getStrYesOrNo());
+                tvAvailability1.setText("Availability1: "+spp.getAvailability1());
+                tvAvailability2.setText("Availability2: "+spp.getAvailability2());
+                tvAvailability3.setText("Availability3: "+spp.getAvailability3());
+                tvAvailability4.setText("Availability4: "+spp.getAvailability4());
             }
 
             @Override
@@ -98,7 +118,7 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
                     //sendEmailVerification();
                     sendUserData();
                     //firebaseAuth.signOut();
-                    Toast.makeText(serviceProviderProfileInfoPage.this, "Successfully Registered, Upload complete!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(serviceProviderProfileInfoPage.this, "Upload complete!", Toast.LENGTH_SHORT).show();
                     //finish();
 
                    // startActivity(new Intent(serviceProviderProfileInfoPage.this, ServiceProviderProfile.class));
@@ -130,6 +150,10 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
         phone = editTextPhone.getText().toString();
         companyName = editTextCompanyName.getText().toString();
         generalDescription = editTextGeneralDescription.getText().toString();
+        A1 = editText1.getText().toString();
+        A2 = editText2.getText().toString();
+        A3 = editText3.getText().toString();
+        A4 = editText4.getText().toString();
         //strYesOrNo = yesOrNoOption.getText().toString();
 
 
@@ -144,8 +168,8 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
 
     private void sendUserData(){
         DatabaseReference myRef = firebaseDatabase.getReference(firebaseAuth.getUid());
-        ServiceProviderProfile userProfile = new ServiceProviderProfile(address,
-                phone, companyName, generalDescription, strYesOrNo);
+        ServiceProviderProfile userProfile = new ServiceProviderProfile(address, phone, companyName, generalDescription, strYesOrNo, A1,  A2, A3
+                , A4);
         myRef.setValue(userProfile);
     }
 

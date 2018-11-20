@@ -7,8 +7,56 @@
     tools:context=".serviceProviderProfileInfoPage">
 
     <EditText
+        android:id="@+id/editText1"
+        android:layout_width="189dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:ems="10"
+        android:hint="Enter Availablity1:"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="186dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextAddress"
+        android:layout_alignParentEnd="true"
+        android:ems="10"
+        android:hint="Enter Availablity2:"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextPhone"
+        android:layout_alignParentEnd="true"
+        android:ems="10"
+        android:hint="Enter Availablity3:"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/tvAvailability3"
+        android:layout_width="159dp"
+        android:layout_height="35dp"
+        android:layout_alignStart="@+id/tvAvailability1"
+        android:layout_centerVertical="true"
+        android:text="Availability3" />
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="177dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextCompanyName"
+        android:layout_alignParentEnd="true"
+        android:ems="10"
+        android:hint="Enter Availablity4:"
+        android:inputType="textPersonName" />
+
+    <EditText
         android:id="@+id/editTextAddress"
-        android:layout_width="wrap_content"
+        android:layout_width="184dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/profileInfoButton"
         android:layout_alignParentStart="true"
@@ -50,7 +98,7 @@
 
     <EditText
         android:id="@+id/editTextPhone"
-        android:layout_width="wrap_content"
+        android:layout_width="185dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextAddress"
         android:layout_alignParentStart="true"
@@ -60,7 +108,7 @@
 
     <EditText
         android:id="@+id/editTextCompanyName"
-        android:layout_width="wrap_content"
+        android:layout_width="179dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextPhone"
         android:layout_alignParentStart="true"
@@ -70,27 +118,28 @@
 
     <Button
         android:id="@+id/updateButton"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
-        android:layout_marginBottom="53dp"
+        android:layout_marginBottom="5dp"
         android:text="Update" />
 
     <Button
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/updateButton"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="109dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="58dp"
         android:onClick="onClick101"
-        android:text="Don't want to update? Back to profile page" />
+        android:text="back" />
 
     <EditText
         android:id="@+id/editTextGeneralDescription"
-        android:layout_width="wrap_content"
+        android:layout_width="185dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextCompanyName"
         android:layout_alignParentStart="true"
@@ -113,9 +162,9 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="102dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp">
+        android:layout_marginTop="434dp"
+        android:layout_marginEnd="177dp"
+        android:layout_marginRight="177dp">
 
         <RadioButton
             android:id="@+id/radioButtonYes"
@@ -140,9 +189,36 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="75dp"
-        android:layout_marginEnd="59dp"
-        android:layout_marginRight="59dp"
+        android:layout_marginTop="402dp"
+        android:layout_marginEnd="207dp"
+        android:layout_marginRight="207dp"
         android:text="Licensed: " />
+
+    <TextView
+        android:id="@+id/tvAvailability1"
+        android:layout_width="158dp"
+        android:layout_height="31dp"
+        android:layout_above="@+id/tvPhone"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Availability1" />
+
+    <TextView
+        android:id="@+id/tvAvailability2"
+        android:layout_width="162dp"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/tvAvailability1"
+        android:layout_alignTop="@+id/tvPhone"
+        android:text="Availability2" />
+
+    <TextView
+        android:id="@+id/tvAvailability4"
+        android:layout_width="158dp"
+        android:layout_height="34dp"
+        android:layout_below="@+id/tvAvailability3"
+        android:layout_alignStart="@+id/tvAvailability1"
+        android:text="Availability4:" />
 
 </RelativeLayout>
