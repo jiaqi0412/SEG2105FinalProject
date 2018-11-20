@@ -12,7 +12,12 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+
+
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class signUpActivity extends AppCompatActivity {
@@ -38,6 +43,8 @@ public class signUpActivity extends AppCompatActivity {
         isServiceProvider = intent.getIntExtra(MainActivity.EXTRA_NUMBER2, 0);
         Button suAlready = (Button) findViewById(R.id.suAlready);
         fbAuth = FirebaseAuth.getInstance();
+
+        //DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
 //        Intent intent = getIntent();
 //        isHomeOwner = intent.getIntExtra(MainActivity.EXTRA_NUMBER1, 0);
@@ -72,6 +79,27 @@ public class signUpActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+
+                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                                FirebaseUser user = fbAuth.getCurrentUser();
+
+                                ref.child(user.getUid()).child("availability1").setValue("null");
+                                ref.child(user.getUid()).child("availability2").setValue("null");
+                                ref.child(user.getUid()).child("availability3").setValue("null");
+                                ref.child(user.getUid()).child("availability4").setValue("null");
+                                ref.child(user.getUid()).child("serviceProviderAddress").setValue("null");
+                                ref.child(user.getUid()).child("serviceProviderCompanyName").setValue("null");
+                                ref.child(user.getUid()).child("serviceProviderGeneralDescription").setValue("null");
+                                ref.child(user.getUid()).child("serviceProviderPhoneNumber").setValue("null");
+                                ref.child(user.getUid()).child("strYesOrNo").setValue("null");
+
+
+
+
+
+
+
+
                                 Toast.makeText(signUpActivity.this,"SignUp Success!", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(signUpActivity.this, Main2Activity.class);
                                 startActivity(i);
