@@ -28,4 +28,17 @@
         android:onClick="onClick1000"
         android:text="update profile info/check Date (Click here)" />
 
+    <Button
+        android:id="@+id/addServices"
+        android:layout_width="342dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="98dp"
+        android:onClick="onClick1002"
+        android:text="Add services" />
+
 </RelativeLayout>

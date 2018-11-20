@@ -37,6 +37,8 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     RadioGroup licensedRadioGroup;
     RadioButton yesOrNoOption;
+    ServiceProviderProfile spp = new ServiceProviderProfile("Empty","Empty","Empty","Empty"
+            ,"Empty","Empty","Empty","Empty","Empty");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +92,8 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ServiceProviderProfile spp = dataSnapshot.getValue(ServiceProviderProfile.class);
+
+                //spp = dataSnapshot.getValue(ServiceProviderProfile.class);
                 tvAddress.setText("Address: "+spp.getServiceProviderAddress());
                 tvPhone.setText("Phone: "+spp.getServiceProviderPhone());
                 tvCompanyName.setText("Company Name: "+spp.getServiceProviderCompanyName());

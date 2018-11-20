@@ -43,9 +43,7 @@ public class ServiceProviderProfile {
     public String getServiceProviderAddress(){
         return serviceProviderAddress;
     }
-    /*public String getServiceProviderId(){
-        return serviceProviderId;
-    }*/
+
     public String getServiceProviderPhone(){
         return serviceProviderPhone;
     }
