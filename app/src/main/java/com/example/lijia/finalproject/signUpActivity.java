@@ -94,12 +94,6 @@ public class signUpActivity extends AppCompatActivity {
                                 ref.child(user.getUid()).child("strYesOrNo").setValue("null");
 
 
-
-
-
-
-
-
                                 Toast.makeText(signUpActivity.this,"SignUp Success!", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(signUpActivity.this, Main2Activity.class);
                                 startActivity(i);
