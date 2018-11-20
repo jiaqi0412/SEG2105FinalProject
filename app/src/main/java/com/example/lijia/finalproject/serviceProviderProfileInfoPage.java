@@ -91,9 +91,9 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
         DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                //spp = dataSnapshot.getValue(ServiceProviderProfile.class);
+                spp = dataSnapshot.getValue(ServiceProviderProfile.class);
                 tvAddress.setText("Address: "+spp.getServiceProviderAddress());
                 tvPhone.setText("Phone: "+spp.getServiceProviderPhone());
                 tvCompanyName.setText("Company Name: "+spp.getServiceProviderCompanyName());
