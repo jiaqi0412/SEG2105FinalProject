@@ -17,7 +17,7 @@ public class ServiceProviderPage extends AppCompatActivity {
     EditText serviceProviderPhone;
     EditText serviceProviderCompanyName;
     EditText serviceProviderGeneralDescription;
-    Button addServices;
+    //Button addServices;
     Button profileInfoButton;
     DatabaseReference databaseService;
 
@@ -28,15 +28,9 @@ public class ServiceProviderPage extends AppCompatActivity {
         databaseService = FirebaseDatabase.getInstance().getReference("service");
 
         profileInfoButton= (Button) findViewById(R.id.profileInfoButton);
-        addServices = findViewById(R.id.addServices);
 
-        addServices.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                startActivity(new Intent(ServiceProviderPage.this, serviceProviderAddService.class));
-            }
-        });
+
 
 
 

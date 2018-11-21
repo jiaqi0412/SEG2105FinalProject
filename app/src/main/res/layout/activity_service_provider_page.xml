@@ -27,19 +27,6 @@
             android:textSize="30sp" />
 
         <Button
-            android:id="@+id/addServices"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="1dp"
-            android:layout_marginLeft="1dp"
-            android:layout_marginTop="14dp"
-            android:onClick="onClick1002"
-            android:text="//Add services" />
-
-        <Button
             android:id="@+id/profileInfoButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
