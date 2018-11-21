@@ -21,7 +21,7 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-          name: Run adminProfileTest
+          name: Run serviceProviderInfoTest
           command: ./gradlew test
       - store_artifacts:
           path: app/build/outputs/apk/debug/
