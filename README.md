@@ -11,3 +11,6 @@ This project was created with the intention of implementing an On-Demand Home Re
 Service Provider Credential:
 Login with email: 111111@gmail.com
 The password is : 111111
+
+
+GitHub Link: https://github.com/jiaqi0412/SEG2105FinalProject.git
