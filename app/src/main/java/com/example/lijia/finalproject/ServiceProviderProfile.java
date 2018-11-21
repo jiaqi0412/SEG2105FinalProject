@@ -3,6 +3,8 @@ package com.example.lijia.finalproject;
 import android.content.Intent;
 import android.view.View;
 
+import java.util.ArrayList;
+
 public class ServiceProviderProfile {
 
     
@@ -15,6 +17,7 @@ public class ServiceProviderProfile {
     String availability2;
     String availability3;
     String availability4;
+    ArrayList<Service> serviceList;
     //String serviceProviderId;
 
     public ServiceProviderProfile(){
@@ -35,6 +38,7 @@ public class ServiceProviderProfile {
         this.availability2 =availability2;
         this.availability3 =availability3;
         this.availability4 =availability4;
+        this.serviceList = serviceList;
 
         //this.serviceProviderId = serviceProviderId;
     }
@@ -68,6 +72,7 @@ public class ServiceProviderProfile {
     public String getAvailability4(){
         return availability4;
     }
+    public ArrayList<Service> getServiceList(){ return serviceList;}
 
 
 }
