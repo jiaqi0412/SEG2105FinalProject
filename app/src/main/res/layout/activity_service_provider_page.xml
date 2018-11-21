@@ -6,39 +6,59 @@
     android:layout_height="match_parent"
     tools:context=".ServiceProviderPage">
 
-    <TextView
-        android:id="@+id/textView7"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="1dp"
-        android:text="Welcome Service Provider!"
-        android:textSize="30sp" />
-
-    <Button
-        android:id="@+id/profileInfoButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView7"
-        android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:onClick="onClick1000"
-        android:text="update profile info/check Date (Click here)" />
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/addServices"
-        android:layout_width="342dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="98dp"
-        android:onClick="onClick1002"
-        android:text="Add services" />
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="1dp"
+            android:text="Welcome Service Provider!"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/addServices"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="14dp"
+            android:onClick="onClick1002"
+            android:text="//Add services" />
+
+        <Button
+            android:id="@+id/profileInfoButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView7"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:onClick="onClick1000"
+            android:text="update profile info/check Date (Click here)" />
+
+        <Button
+            android:id="@+id/viewServices"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profileInfoButton"
+            android:layout_centerHorizontal="true"
+            android:onClick="onClick1003"
+            android:text="View My Services" />
+
+    </LinearLayout>
 
 </RelativeLayout>

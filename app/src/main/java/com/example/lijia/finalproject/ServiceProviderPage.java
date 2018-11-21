@@ -68,6 +68,11 @@ public class ServiceProviderPage extends AppCompatActivity {
         Intent i = new Intent(this, serviceProviderAddService.class);
 
         startActivity(i);
+    }
 
+
+    public void onClick1003(View view) {
+        Intent i = new Intent(this, service_provider_list.class);
+        startActivity(i);
     }
 }

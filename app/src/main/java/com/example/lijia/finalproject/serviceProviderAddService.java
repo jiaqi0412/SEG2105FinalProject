@@ -30,7 +30,7 @@ public class serviceProviderAddService extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_service_provider_add_service);
+        setContentView(R.layout.activity_service_provider_add_service_2);
         databaseService = FirebaseDatabase.getInstance().getReference("service");
         listViewService = (ListView) findViewById(R.id.listViewService);
         serviceList = new ArrayList<>();
