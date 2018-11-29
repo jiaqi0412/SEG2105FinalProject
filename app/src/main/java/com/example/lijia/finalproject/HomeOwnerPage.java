@@ -12,4 +12,10 @@ public class HomeOwnerPage extends AppCompatActivity {
         setContentView(R.layout.activity_home_owner_page);
     }
 
+    public void onClick1000(View view) {
+
+        Intent i = new Intent (this, homeOwnerSearchPage.class);
+        startActivity(i);
+
+    }
 }
