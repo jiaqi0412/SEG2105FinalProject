@@ -30,7 +30,7 @@ public class signUpActivity extends AppCompatActivity {
     private EditText Password, Name, Email;
     private Button SignUp, suAlready;
     private FirebaseAuth fbAuth;
-
+    private String password;
     public  String type;
 
     @Override
@@ -44,38 +44,16 @@ public class signUpActivity extends AppCompatActivity {
         Button suAlready = (Button) findViewById(R.id.suAlready);
         fbAuth = FirebaseAuth.getInstance();
 
-        //DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-
-//        Intent intent = getIntent();
-//        isHomeOwner = intent.getIntExtra(MainActivity.EXTRA_NUMBER1, 0);
-//        isServiceProvider = intent.getIntExtra(MainActivity.EXTRA_NUMBER2, 0);
-
-//        TextView textView3 = (TextView) findViewById(R.id.textView3);
-//        //TextView textView2 = (TextView) findViewById(R.id.textView2);
-//
-//        textView3.setText("" + isHomeOwner);
-
-
-//        Name = (EditText)findViewById(R.id.signUpName);
-//        Password = (EditText)findViewById(R.id.signUpPassword);
-//        Button SignUp = (Button)findViewById(R.id.signUpButton);
-//
-//        SignUp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                validate(Name.getText().toString(), Password.getText().toString());
-//            }
-//        });
-
         SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(validate() == true){
                     //upload the data to the database
                     String UEmail = Email.getText().toString().trim();
-                    String UPass = Password.getText().toString().trim();//trim removes white space
+                    password = Password.getText().toString().trim();//trim removes white space
+                    password = encrypt(password);
 
-                    fbAuth.createUserWithEmailAndPassword(UEmail,UPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    fbAuth.createUserWithEmailAndPassword(UEmail,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
@@ -83,6 +61,7 @@ public class signUpActivity extends AppCompatActivity {
                                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
                                 FirebaseUser user = fbAuth.getCurrentUser();
 
+                                ref.child(user.getUid()).child("password").setValue(password);
                                 ref.child(user.getUid()).child("availability1").setValue("null");
                                 ref.child(user.getUid()).child("availability2").setValue("null");
                                 ref.child(user.getUid()).child("availability3").setValue("null");
@@ -92,7 +71,6 @@ public class signUpActivity extends AppCompatActivity {
                                 ref.child(user.getUid()).child("serviceProviderGeneralDescription").setValue("null");
                                 ref.child(user.getUid()).child("serviceProviderPhoneNumber").setValue("null");
                                 ref.child(user.getUid()).child("strYesOrNo").setValue("null");
-
 
                                 Toast.makeText(signUpActivity.this,"SignUp Success!", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(signUpActivity.this, Main2Activity.class);
@@ -115,14 +93,13 @@ public class signUpActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     private Boolean validate(){
         Boolean result = false;
 
         String name = Name.getText().toString();
-        String password = Password.getText().toString();
+        password = Password.getText().toString();
         String email = Email.getText().toString();
 
         if (name.isEmpty() || password.isEmpty() || email.isEmpty()){
@@ -137,6 +114,11 @@ public class signUpActivity extends AppCompatActivity {
         return result;
     }
 
+    private String encrypt(String pass){
+        String passy = pass + "a";
+        return passy;
+    }
+
     private void setUI (){
         Name = (EditText) findViewById(R.id.signUpName);
         Password = (EditText) findViewById(R.id.signUpPassword);
@@ -145,44 +127,9 @@ public class signUpActivity extends AppCompatActivity {
     }
 
     public void onClick5(View view) {
-
        Intent i = new Intent(this, Main2Activity.class);
-
         startActivity(i);
 
     }
-//    public void validate(String Name, String Password){
-//        if((Name.equals("admin")) && (Password.equals("admin"))){
-//            type = "admin";
-//            EditText Name1 = (EditText) findViewById(R.id.signUpName);
-//            String name = Name1.getText().toString();
-//
-//            Intent intent = new Intent(signUpActivity.this, welcomePage.class);
-//            intent.putExtra(EXTRA_TEXT, name);
-//            intent.putExtra(EXTRA_TEXT1, type);
-//
-//            startActivity(intent);
-//        }else if(isHomeOwner == 1){
-//            type = "home owner";
-//            EditText Name1 = (EditText) findViewById(R.id.signUpName);
-//            String name = Name1.getText().toString();
-//
-//            Intent intent = new Intent(signUpActivity.this, welcomePage.class);
-//            intent.putExtra(EXTRA_TEXT, name);
-//            intent.putExtra(EXTRA_TEXT1, type);
-//
-//            startActivity(intent);
-//        }else if(isServiceProvider == 1){
-//            type = "service provider";
-//            EditText Name1 = (EditText) findViewById(R.id.signUpName);
-//            String name = Name1.getText().toString();
-//
-//            Intent intent = new Intent(signUpActivity.this, welcomePage.class);
-//            intent.putExtra(EXTRA_TEXT, name);
-//            intent.putExtra(EXTRA_TEXT1, type);
-//
-//            startActivity(intent);
-//        }
-//    }
 }
 

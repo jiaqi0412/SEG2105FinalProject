@@ -128,7 +128,6 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
 
                     startActivity(new Intent(serviceProviderProfileInfoPage.this, serviceProviderProfileInfoPage.class));
 
-
                 }
             }
         });
@@ -159,7 +158,6 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
         A4 = editText4.getText().toString();
         //strYesOrNo = yesOrNoOption.getText().toString();
 
-
         if(address.isEmpty() || phone.isEmpty() || companyName.isEmpty()){
             Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT).show();
         }else{
@@ -183,6 +181,5 @@ public class serviceProviderProfileInfoPage extends AppCompatActivity {
         startActivity(i);
 
     }
-
 
 }

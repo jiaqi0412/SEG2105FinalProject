@@ -91,7 +91,6 @@ public class serviceProviderAddService extends AppCompatActivity {
             }
         });
 
-
     }
 
     private void deleteService(String serviceId){

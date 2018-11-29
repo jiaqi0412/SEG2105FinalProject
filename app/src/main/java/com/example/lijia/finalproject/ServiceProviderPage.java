@@ -29,13 +29,6 @@ public class ServiceProviderPage extends AppCompatActivity {
 
         profileInfoButton= (Button) findViewById(R.id.profileInfoButton);
 
-
-
-
-
-
-
-
     }
 
     @Override
@@ -48,19 +41,13 @@ public class ServiceProviderPage extends AppCompatActivity {
     }
 
 
-
     public void onClick1000(View view) {
-
         Intent i = new Intent(this, serviceProviderProfileInfoPage.class);
-
         startActivity(i);
-
     }
 
     public void onClick1002(View view) {
-
         Intent i = new Intent(this, serviceProviderAddService.class);
-
         startActivity(i);
     }
 

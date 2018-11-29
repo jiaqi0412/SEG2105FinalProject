@@ -1,9 +1,9 @@
 package com.example.lijia.finalproject;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,13 +14,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class signInActivity extends AppCompatActivity {
     public static final String EXTRA_TEXT = "com.example.lijia.finalproject.EXTRA_TEXT";
     public static final String EXTRA_TEXT1 = "com.example.lijia.finalproject.EXTRA_TEXT1";
 
+
     private EditText Password,Name;
     private FirebaseAuth fbAuth;
+    private FirebaseDatabase fbData;
 
     private Button SignIn, redirectToSignUp;
     public  String type;
@@ -55,7 +58,14 @@ public class signInActivity extends AppCompatActivity {
         SignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                validate(Name.getText().toString(), Password.getText().toString());
+                String name = Name.getText().toString();
+                String pass = Password.getText().toString();
+                if((Name.equals("admin")) && (Password.equals("admin"))){
+                    validate(name, pass);
+                }
+                else {
+                    validate(name, encrypt(pass));
+                }
             }
         });
 
@@ -70,7 +80,13 @@ public class signInActivity extends AppCompatActivity {
 
     }
 
+    private String encrypt(String pass){
+        String passy = pass + "a";
+        return passy;
+    }
+
     public void validate(String Name, String Password){
+
         if((Name.equals("admin")) && (Password.equals("admin"))){
             type = "admin";
             EditText Name1 = (EditText) findViewById(R.id.signInName);
