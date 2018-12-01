@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
-        android:text="Services Provided"
+        android:text="Services Provided - Click to delete"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <Button

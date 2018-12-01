@@ -60,13 +60,20 @@ public class service_provider_add_service_2 extends AppCompatActivity {
 
                 return true;
                 */
-
+                /*
+                String id = ref.push().getKey();
+                FirebaseDatabase.getInstance().getReference().child(user.getUid()).child("keys").child(service.getServiceId()).setValue(id);
+                ref.child(id).setValue(service);
+                Toast.makeText(service_provider_add_service_2.this,"Done.", Toast.LENGTH_SHORT).show();
+                */
+                /*
                 ref.orderByChild("serviceId").equalTo(service.getServiceId()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (!dataSnapshot.exists()) {
                             Toast.makeText(service_provider_add_service_2.this,"Service successfully added!", Toast.LENGTH_SHORT).show();
                             final String id = ref.push().getKey();
+                            FirebaseDatabase.getInstance().getReference().child(user.getUid()).child("keys").child(service.getServiceId()).setValue(id);
                             ref.child(id).setValue(service);
                         } else if (dataSnapshot.exists()){
                             Toast.makeText(service_provider_add_service_2.this, "Done.", Toast.LENGTH_SHORT).show();
@@ -78,6 +85,27 @@ public class service_provider_add_service_2 extends AppCompatActivity {
 
                     }
                 });
+                */
+
+                ref.orderByChild("serviceId").equalTo(service.getServiceId()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (!dataSnapshot.exists()) {
+                            Toast.makeText(service_provider_add_service_2.this,"Service successfully added!", Toast.LENGTH_SHORT).show();
+                            final String id = ref.push().getKey();
+                            FirebaseDatabase.getInstance().getReference().child(user.getUid()).child("keys").child(service.getServiceId()).setValue(id);
+                            ref.child(id).setValue(service);
+                        } else if (dataSnapshot.exists()){
+                            Toast.makeText(service_provider_add_service_2.this, "Done.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
 
                 return true;
             }

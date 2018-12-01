@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -25,9 +26,12 @@ public class service_provider_list extends AppCompatActivity {
 
     //EditText editTextHourlyRate;
     ListView listViewService;
-    ListView allServices;
     List<Service> serviceListTemp;
     List<Service> serviceList;
+    List<String> keys;
+
+    ArrayAdapter<Service> adapter;
+
     DatabaseReference databaseService;
     FirebaseUser user;
     FirebaseAuth fbAuth;
@@ -45,34 +49,45 @@ public class service_provider_list extends AppCompatActivity {
         listViewService = (ListView) findViewById(R.id.serviceListView);
         serviceListTemp = new ArrayList<>();
         serviceList = new ArrayList<>();
-        Button addServices = (Button) findViewById(R.id.addServices);
+        adapter = new ArrayAdapter<Service>(this, R.layout.activity_service_provider_list, serviceList);
 
 
+        //to remove services from visible service list and the database
+        listViewService.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                final DatabaseReference localRef = FirebaseDatabase.getInstance().getReference(user.getUid());
+                final Service service = serviceList.get(position);
+                final String serviceId = service.getServiceId();
+
+                //to access value of a "key" directory child
+                localRef.child("keys").child(serviceId).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String value = dataSnapshot.getValue().toString();
+                        localRef.child("servicesOffered").child(value).removeValue();
+                        localRef.child("keys").child(serviceId).removeValue();
+                        Toast.makeText(service_provider_list.this,"Service removed.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                serviceList.remove(position);
+                listViewService.setAdapter(new ServiceList(service_provider_list.this, serviceList));
+            }
+        });
+
+        //to display the service provider's list of services, obtained from database, to the user
         databaseService.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 serviceList.clear();
-/*
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    Service service = data.getValue(Service.class);
-                    serviceListTemp.add(service);
-                }
-
-                for (Service service : serviceListTemp) {
-                    String id = service.getServiceId();
-                    String rate = service.getServiceHourlyRate();
-                    String name = service.getServiceName();
-                    Service serv = new Service(id, name, rate);
-
-                    if (!serviceList.contains(serv)) {
-                        serviceList.add(service);
-                    }
-                }
-
-                ServiceList adapter = new ServiceList(service_provider_list.this, serviceList);
-                listViewService.setAdapter(adapter);
-*/
 
                 for (DataSnapshot data : dataSnapshot.getChildren()){
                     Service service = data.getValue(Service.class);
@@ -93,7 +108,7 @@ public class service_provider_list extends AppCompatActivity {
                     }
                 }
 
-                ServiceList adapter = new ServiceList(service_provider_list.this, serviceList);
+                adapter = new ServiceList(service_provider_list.this, serviceList);
                 listViewService.setAdapter(adapter);
 
             }
@@ -104,44 +119,7 @@ public class service_provider_list extends AppCompatActivity {
             }
         });
 
-        listViewService.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                final Service serv = serviceList.get(position);
-                final String servId = serv.getServiceId();
-                final DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(user.getUid()).child("servicesOffered").child(servId);
-
-                ref.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            //serviceList.remove(position);
-                            //ServiceList adapter = new ServiceList(service_provider_list.this, serviceList);
-                            //listViewService.setAdapter(adapter);
-                            //ref.removeValue();
-                        } else if (dataSnapshot.exists()){
-                            Toast.makeText(service_provider_list.this, "Error", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-
-                /*
-                serviceList.remove(position);
-                ServiceList adapter = new ServiceList(service_provider_list.this, serviceList);
-                listViewService.setAdapter(adapter);
-*/
-                return true;
-            }
-        });
-
     }
-
 
     public void onClick100(View view) {
 
@@ -151,32 +129,4 @@ public class service_provider_list extends AppCompatActivity {
     }
 
 
-/*
-    @Override
-    protected void onStart {
-        super.onStart();
-
-        databaseService.addValueEventListener(new ValueEventListener(){
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot){
-
-                serviceList.clear();
-                for(DataSnapshot serviceSnapshot : dataSnapshot.getChildren()){
-                    Service service = serviceSnapshot.getValue(Service.class);
-
-                    serviceList.add(service);
-                }
-
-                ServiceList adapter = new ServiceList(service_provider_list.this, serviceList);
-                listViewService.setAdapter(adapter);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError){
-
-            }
-
-        });
-    }
-*/
 }
