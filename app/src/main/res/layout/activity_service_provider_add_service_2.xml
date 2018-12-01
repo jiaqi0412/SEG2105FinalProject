@@ -10,7 +10,7 @@
         android:id="@+id/textView10"
         android:layout_width="385dp"
         android:layout_height="34dp"
-        android:text="Choose Services to Add"
+        android:text="Long click on a service to add"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <ListView
