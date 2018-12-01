@@ -64,7 +64,7 @@ public class signInActivity extends AppCompatActivity {
                     validate(name, pass);
                 }
                 else {
-                    validate(name, encrypt(pass));
+                    validate(name, basicencrypt(pass));
                 }
             }
         });
@@ -80,9 +80,9 @@ public class signInActivity extends AppCompatActivity {
 
     }
 
-    private String encrypt(String pass){
-        String passy = pass + "a";
-        return passy;
+    private String basicencrypt(String original) {
+        String encrypted = "hehehehe"+original+original+original+"heheheehehe";
+        return encrypted;
     }
 
     public void validate(String Name, String Password){

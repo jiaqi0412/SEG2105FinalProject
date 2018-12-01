@@ -51,7 +51,7 @@ public class signUpActivity extends AppCompatActivity {
                     //upload the data to the database
                     String UEmail = Email.getText().toString().trim();
                     password = Password.getText().toString().trim();//trim removes white space
-                    password = encrypt(password);
+                    password = basicencrypt(password);
 
                     fbAuth.createUserWithEmailAndPassword(UEmail,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -114,9 +114,9 @@ public class signUpActivity extends AppCompatActivity {
         return result;
     }
 
-    private String encrypt(String pass){
-        String passy = pass + "a";
-        return passy;
+    private String basicencrypt(String original) {
+        String encrypted = "hehehehe"+original+original+original+"heheheehehe";
+        return encrypted;
     }
 
     private void setUI (){
