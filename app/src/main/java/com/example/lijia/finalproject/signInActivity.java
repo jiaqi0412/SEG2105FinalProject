@@ -60,12 +60,7 @@ public class signInActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String name = Name.getText().toString();
                 String pass = Password.getText().toString();
-                if((Name.equals("admin")) && (Password.equals("admin"))){
-                    validate(name, pass);
-                }
-                else {
-                    validate(name, basicencrypt(pass));
-                }
+                validate(name,pass);
             }
         });
 
@@ -102,7 +97,7 @@ public class signInActivity extends AppCompatActivity {
             EditText Name1 = (EditText) findViewById(R.id.signInName);
             name = Name1.getText().toString();
 
-            fbAuth.signInWithEmailAndPassword(Name, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            fbAuth.signInWithEmailAndPassword(Name, basicencrypt(Password)).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
@@ -123,7 +118,7 @@ public class signInActivity extends AppCompatActivity {
             EditText Name1 = (EditText) findViewById(R.id.signInName);
             name = Name1.getText().toString();
 
-            fbAuth.signInWithEmailAndPassword(Name, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            fbAuth.signInWithEmailAndPassword(Name, basicencrypt(Password)).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
