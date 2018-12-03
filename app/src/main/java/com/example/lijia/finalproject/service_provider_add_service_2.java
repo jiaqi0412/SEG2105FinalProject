@@ -47,45 +47,6 @@ public class service_provider_add_service_2 extends AppCompatActivity {
                 final FirebaseUser user = fbAuth.getCurrentUser();
                 final DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(user.getUid()).child("servicesOffered");
                 final Service service = serviceList.get(i);
-                /*
-                if (!currentServices.contains(service)) {
-                    final String id = ref.child(user.getUid()).child("servicesOffered").push().getKey();
-                    ref.child(user.getUid()).child("servicesOffered").child(id).setValue(service);
-                    Toast.makeText(service_provider_add_service_2.this,"Service successfully added!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(service_provider_add_service_2.this, "Service cannot be added.", Toast.LENGTH_SHORT).show();
-                }
-
-                currentServices.add(service);
-
-                return true;
-                */
-                /*
-                String id = ref.push().getKey();
-                FirebaseDatabase.getInstance().getReference().child(user.getUid()).child("keys").child(service.getServiceId()).setValue(id);
-                ref.child(id).setValue(service);
-                Toast.makeText(service_provider_add_service_2.this,"Done.", Toast.LENGTH_SHORT).show();
-                */
-                /*
-                ref.orderByChild("serviceId").equalTo(service.getServiceId()).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (!dataSnapshot.exists()) {
-                            Toast.makeText(service_provider_add_service_2.this,"Service successfully added!", Toast.LENGTH_SHORT).show();
-                            final String id = ref.push().getKey();
-                            FirebaseDatabase.getInstance().getReference().child(user.getUid()).child("keys").child(service.getServiceId()).setValue(id);
-                            ref.child(id).setValue(service);
-                        } else if (dataSnapshot.exists()){
-                            Toast.makeText(service_provider_add_service_2.this, "Done.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-                */
 
                 ref.orderByChild("serviceId").equalTo(service.getServiceId()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

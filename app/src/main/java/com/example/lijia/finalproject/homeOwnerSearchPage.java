@@ -10,9 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.content.Intent;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,12 +31,15 @@ import java.util.ArrayList;
 public class homeOwnerSearchPage extends AppCompatActivity {
 
     EditText searchEditText;
+    TextView serviceName;
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
     FirebaseUser firebaseUser;
     ArrayList<String> serviceNameList;
     SearchAdapter searchAdapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +47,7 @@ public class homeOwnerSearchPage extends AppCompatActivity {
 
 
         searchEditText = findViewById(R.id.searchEditText);
+        serviceName = findViewById(R.id.serviceName);
         recyclerView = findViewById(R.id.recyclerView);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -72,7 +79,24 @@ public class homeOwnerSearchPage extends AppCompatActivity {
                 }
             }
         });
+
+        //////////////
+
+
+
+        //////////////
     }
+
+    public void onClickServiceName(View v) {
+        String serv = serviceName.getText().toString();
+
+        Intent i = new Intent(this, HomeOwnerPage.class);
+        i.putExtra("serv", serv);
+        startActivity(i);
+
+    }
+
+
 
     private void setAdapter(final String searchedString){
 
@@ -99,8 +123,9 @@ public class homeOwnerSearchPage extends AppCompatActivity {
                         break;
                 }
 
-                searchAdapter= new SearchAdapter(homeOwnerSearchPage.this, serviceNameList);
+                searchAdapter = new SearchAdapter(homeOwnerSearchPage.this, serviceNameList);
                 recyclerView.setAdapter(searchAdapter);
+                serviceName.setText(serviceNameList.get(0));
 
             }
 
