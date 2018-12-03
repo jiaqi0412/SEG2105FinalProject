@@ -1,5 +1,6 @@
 package com.example.lijia.finalproject;
 
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class HomeOwnerRate extends AppCompatActivity {
 
@@ -60,6 +63,34 @@ public class HomeOwnerRate extends AppCompatActivity {
                                 ratingId.setValue(rating);
                                 commentId.setValue(comment.getText().toString());
                                 Toast.makeText(HomeOwnerRate.this, "Your feedback has been submitted, thank you.", Toast.LENGTH_SHORT).show();
+
+                                final DatabaseReference serviceRatingRef = data.getRef().child("averageRating").push();
+                                final DatabaseReference averageToDelete = data.getRef().child("averageRating");
+
+                                data.getRef().child("ratings").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        ArrayList<Integer> allRatings = new ArrayList<>();
+                                        for (DataSnapshot ratingData : dataSnapshot.getChildren()) {
+                                            allRatings.add(Integer.parseInt(ratingData.getValue().toString()));
+                                        }
+
+                                        int total = 0;
+                                        for (int i = 0; i < allRatings.size(); i++) {
+                                            total += allRatings.get(i);
+                                        }
+
+                                        double average = (double) total/allRatings.size();
+                                        averageToDelete.removeValue();
+                                        serviceRatingRef.setValue(average);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
                             }
                         }
                     }
