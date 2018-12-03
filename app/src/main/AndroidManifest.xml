@@ -42,6 +42,7 @@
         <activity android:name=".service_provider_list" />
         <activity android:name=".service_provider_add_service_2" />
         <activity android:name=".homeOwnerSearchPage" />
+        <activity android:name=".HomeOwnerRate"></activity>
     </application>
 
 </manifest>

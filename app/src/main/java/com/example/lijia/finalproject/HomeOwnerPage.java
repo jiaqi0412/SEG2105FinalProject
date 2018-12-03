@@ -1,7 +1,9 @@
 package com.example.lijia.finalproject;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -57,10 +59,40 @@ public class HomeOwnerPage extends AppCompatActivity {
         jobsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                final String[] options ={"Rate", "Delete"};
+                final int choice = position;
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(HomeOwnerPage.this);
+                builder.setTitle("Choose an option");
+                builder.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if ("Delete".equals(options[which])) {
+                            serviceList.remove(choice);
+                            jobsListView.setAdapter(new ServiceList(HomeOwnerPage.this, serviceList));
+                        } else if ("Rate".equals(options[which])) {
+                            Intent i = new Intent(HomeOwnerPage.this, HomeOwnerRate.class);
+                            i.putExtra("serv", serviceList.get(choice).getServiceName());
+                            startActivity(i);
+                        }
+
+                    }
+                });
+
+                builder.show();
+            }
+        });
+
+        /*
+        jobsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 serviceList.remove(position);
                 jobsListView.setAdapter(new ServiceList(HomeOwnerPage.this, serviceList));
             }
         });
+        */
 
     }
 
@@ -82,7 +114,17 @@ public class HomeOwnerPage extends AppCompatActivity {
                             Service service = serviceSnapshot.getValue(Service.class);
                             serviceList.add(service);
                         }
+                        int count = 0;
+                        for (Service x : serviceList) {
 
+                            if (x.getServiceName().equals(s)) {
+                                count++;
+                            }
+                            if (count > 1) {
+                                serviceList.remove(x);
+                                count--;
+                            }
+                        }
                         ServiceList adapter = new ServiceList(HomeOwnerPage.this, serviceList);
                         jobsListView.setAdapter(adapter);
 
