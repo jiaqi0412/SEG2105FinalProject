@@ -38,11 +38,10 @@
         <activity android:name=".adminEditOrRemoveService" />
         <activity android:name=".ServiceProviderPage" />
         <activity android:name=".HomeOwnerPage" />
-        <activity android:name=".serviceProviderProfileInforPage" />
         <activity android:name=".serviceProviderProfileInfoPage" />
         <activity android:name=".service_provider_list" />
         <activity android:name=".service_provider_add_service_2" />
-        <activity android:name=".homeOwnerSearchPage"></activity>
+        <activity android:name=".homeOwnerSearchPage" />
     </application>
 
 </manifest>
