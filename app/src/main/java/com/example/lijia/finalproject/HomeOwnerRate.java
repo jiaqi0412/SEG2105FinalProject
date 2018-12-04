@@ -81,8 +81,10 @@ public class HomeOwnerRate extends AppCompatActivity {
                                         }
 
                                         double average = (double) total/allRatings.size();
+                                        int a = (int) Math.round(average);
+                                        //String b = Integer.toString(a);
                                         averageToDelete.removeValue();
-                                        serviceRatingRef.setValue(average);
+                                        serviceRatingRef.setValue(a);
                                     }
 
                                     @Override

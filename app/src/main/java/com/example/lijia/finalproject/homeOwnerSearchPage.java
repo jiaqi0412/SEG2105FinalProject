@@ -125,7 +125,12 @@ public class homeOwnerSearchPage extends AppCompatActivity {
 
                 searchAdapter = new SearchAdapter(homeOwnerSearchPage.this, serviceNameList);
                 recyclerView.setAdapter(searchAdapter);
-                serviceName.setText(serviceNameList.get(0));
+                try{
+                    serviceName.setText(serviceNameList.get(0));
+
+                }catch(Exception e){
+                    Toast.makeText(homeOwnerSearchPage.this, "No Result", Toast.LENGTH_LONG).show();
+                }
 
             }
 
